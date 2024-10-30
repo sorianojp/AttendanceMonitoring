@@ -13,7 +13,7 @@ class ApiController extends Controller
     {
         $attendances = Attendance::whereHas('student.user', function ($query) {
             $query->where('id', Auth::id());
-        })->get();
+        })->with('student')->get();
         return response()->json($attendances);
     }
     public function login(Request $request)
