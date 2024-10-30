@@ -1,14 +1,60 @@
 <x-guest-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Scan') }}
-        </h2>
-    </x-slot>
-    <div class="max-w-full">
-        <form id="rfid-form" method="POST" action="{{ route('attendances.store') }}">
-            @csrf
-            <input type="text" id="student_no" name="student_no" placeholder="Scan your RFID" autofocus>
-        </form>
+    <div class="max-w-full h-screen overflow-hidden bg-blue-700">
+        <div class="pt-6">
+            <h1 class="text-center font-black text-5xl text-white">ISUdD Attendance Monitoring</h1>
+        </div>
+        <div class="flex items-center justify-center h-screen">
+            <div class="w-1/3 justify-center items-center p-4">
+                <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        <form id="rfid-form" method="POST" action="{{ route('attendances.store') }}" class="w-full my-2">
+                            @csrf
+                            <x-text-input type="text" id="student_no" name="student_no" placeholder="Scan your RFID"
+                                autofocus autocomplete="off" />
+                        </form>
+                        <x-auth-session-status :status="session('status')" class="my-2" />
+                    </div>
+                </div>
+            </div>
+            <div class="w-2/3 p-4">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full shadow-sm text-md text-left rtl:text-right text-gray-900">
+                        <thead class="uppercase bg-gray-300">
+                            <tr>
+                                <th scope="col" class="p-2">Name</th>
+                                <th scope="col" class="p-2">Entry Time</th>
+                                <th scope="col" class="p-2">Exit Time</th>
+                                <th scope="col" class="p-2">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600">
+                            @if ($attendances->isEmpty())
+                                <tr class="bg-white border-b">
+                                    <td colspan="5" class="p-2">No attendance records found.</td>
+                                </tr>
+                            @else
+                                @foreach ($attendances as $attendance)
+                                    <tr class="bg-white border-b">
+                                        <td class="p-2">{{ $attendance->student->full_name }}</td>
+                                        <td class="p-2">
+                                            {{ \Carbon\Carbon::parse($attendance->entry_time)->format('F j, Y g:i:s A') }}
+                                        </td>
+                                        <td class="p-2">
+                                            {{ $attendance->exit_time ? \Carbon\Carbon::parse($attendance->exit_time)->format('F j, Y g:i:s A') : '--' }}
+                                        </td>
+                                        <td
+                                            class="p-2 font-extrabold uppercase {{ $attendance->status === 'In' ? 'text-green-600' : ($attendance->status === 'Out' ? 'text-red-600' : '') }}">
+                                            {{ $attendance->status }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <script>
         let inputTimer;

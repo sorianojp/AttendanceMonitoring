@@ -8,9 +8,11 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    public function create()
+    public function index()
     {
-        return view('users.create');
+        $users = User::all();
+        return view('users.index',compact('users'))
+        ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function store(Request $request)
     {

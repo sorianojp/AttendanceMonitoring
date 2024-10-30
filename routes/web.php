@@ -4,10 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\UserController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\StudentController;
+use App\Models\Attendance;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -20,15 +18,17 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/rfid-scan', function() {
-    return view('rfid_scan');
+Route::get('/', function() {
+    $attendances = Attendance::orderBy('updated_at', 'desc')->take(15)->get();
+    return view('rfid_scan', compact('attendances'));
 });
+
 Route::resource('attendances', AttendanceController::class);
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::resource('users', UserController::class);
+    Route::resource('users.students', StudentController::class)->shallow();
 });
 
 require __DIR__.'/auth.php';
