@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
-use Illuminate\Http\Request;
+namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Attendance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
