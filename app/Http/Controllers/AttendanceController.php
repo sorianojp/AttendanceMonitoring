@@ -8,14 +8,6 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    public function indexMobile()
-    {
-        $attendances = Attendance::whereHas('student.user', function ($query) {
-            $query->where('id', Auth::id());
-        })->get();
-
-        return response()->json($attendances);
-    }
     public function index()
     {
         $attendances = Attendance::whereHas('student.user', function ($query) {

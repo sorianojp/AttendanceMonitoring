@@ -2,13 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ApiController;
 
-Route::post('/loginMobile', [AuthController::class, 'loginMobile']);
-Route::middleware('auth:sanctum')->get('/attendancesMobile', [AttendanceController::class, 'indexMobile']);
-
-
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
+Route::post('/login', [ApiController::class, 'login']);
+Route::middleware('auth:sanctum')->get('/attendances', [ApiController::class, 'index']);
