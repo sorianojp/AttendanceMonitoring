@@ -6,6 +6,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Models\Attendance;
+use Carbon\Carbon;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -19,8 +20,9 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/', function() {
-    $attendances = Attendance::orderBy('updated_at', 'desc')->take(15)->get();
-    return view('rfid_scan', compact('attendances'));
+    $attendances = Attendance::orderBy('updated_at', 'desc')->take(10)->get();
+    $today = Carbon::now()->format('F d, h:i:s A');
+    return view('rfid_scan', compact('attendances', 'today'));
 });
 
 Route::resource('attendances', AttendanceController::class);

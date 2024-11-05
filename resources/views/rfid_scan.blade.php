@@ -1,13 +1,17 @@
 <x-guest-layout>
     <div class="max-w-full h-screen overflow-hidden bg-blue-700">
-        <div class="pt-6">
-            <h1 class="text-center font-black text-5xl text-white">ISUdD Attendance Monitoring</h1>
+        <div class="p-6">
+            <h1 class="font-black text-xl text-white">ISUdD Attendance Monitoring</h1>
+        </div>
+        <div>
+            <h1 class="text-center font-black text-5xl text-white" id="current-time">{{ $today }}</h1>
         </div>
         <div class="flex items-center justify-center h-screen">
             <div class="w-1/3 justify-center items-center p-4">
                 <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <form id="rfid-form" method="POST" action="{{ route('attendances.store') }}" class="w-full my-2">
+                        <form id="rfid-form" method="POST" action="{{ route('attendances.store') }}"
+                            class="w-full my-2">
                             @csrf
                             <x-text-input type="text" id="student_no" name="student_no" placeholder="Scan your RFID"
                                 autofocus autocomplete="off" />
@@ -37,10 +41,10 @@
                                     <tr class="bg-white border-b">
                                         <td class="p-2">{{ $attendance->student->full_name }}</td>
                                         <td class="p-2">
-                                            {{ \Carbon\Carbon::parse($attendance->entry_time)->format('F j, Y g:i:s A') }}
+                                            {{ \Carbon\Carbon::parse($attendance->entry_time)->format('g:i:s A') }}
                                         </td>
                                         <td class="p-2">
-                                            {{ $attendance->exit_time ? \Carbon\Carbon::parse($attendance->exit_time)->format('F j, Y g:i:s A') : '--' }}
+                                            {{ $attendance->exit_time ? \Carbon\Carbon::parse($attendance->exit_time)->format('g:i:s A') : '--' }}
                                         </td>
                                         <td
                                             class="p-2 font-extrabold uppercase {{ $attendance->status === 'In' ? 'text-green-600' : ($attendance->status === 'Out' ? 'text-red-600' : '') }}">
@@ -75,5 +79,30 @@
             studentInput.focus();
         }
     </script>
+    <script>
+        // Function to format the date and time
+        function formatTime(date) {
+            let options = {
+                month: 'long',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            return date.toLocaleString('en-US', options).replace(',', '');
+        }
 
+        // Function to update the time every second
+        function updateTime() {
+            let now = new Date();
+            document.getElementById('current-time').textContent = formatTime(now);
+        }
+
+        // Call the updateTime function every 1 second (1000 milliseconds)
+        setInterval(updateTime, 1000);
+
+        // Set the initial time when the page loads
+        updateTime();
+    </script>
 </x-guest-layout>
