@@ -1,17 +1,13 @@
 <x-guest-layout>
-    <div class="max-w-full h-screen overflow-hidden bg-blue-700">
-        <div class="p-6">
-            <h1 class="font-black text-xl text-white">ISUdD Attendance Monitoring</h1>
-        </div>
+    <div class="max-w-full h-screen overflow-hidden bg-gray-100">
         <div>
-            <h1 class="text-center font-black text-5xl text-white" id="current-time">{{ $today }}</h1>
+            <h1 class="mt-4 text-center font-black text-5xl text-blue-900" id="current-time">{{ $today }}</h1>
         </div>
-        <div class="flex items-center justify-center h-screen">
-            <div class="w-1/3 justify-center items-center p-4">
+        <div class="flex items-center justify-center h-screen p-4 space-x-4">
+            <div class="w-1/3 justify-center items-center">
                 <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <form id="rfid-form" method="POST" action="{{ route('attendances.store') }}"
-                            class="w-full my-2">
+                        <form id="rfid-form" method="POST" action="{{ route('attendances.store') }}" class="w-full my-2">
                             @csrf
                             <x-text-input type="text" id="student_no" name="student_no" placeholder="Scan your RFID"
                                 autofocus autocomplete="off" />
@@ -20,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-2/3 p-4">
+            <div class="w-2/3">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full shadow-sm text-md text-left rtl:text-right text-gray-900">
                         <thead class="uppercase bg-gray-300">
@@ -58,7 +54,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <script>
         let inputTimer;
