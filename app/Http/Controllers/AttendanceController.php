@@ -10,10 +10,9 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        $attendances = Attendance::whereHas('student.user', function ($query) {
-            $query->where('id', Auth::id());
-        })->get();
-        return view('attendances.index', compact('attendances'));
+        $attendances = Attendance::latest()->paginate(10);
+        return view('attendances.index',compact('attendances'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function store(Request $request)
     {
