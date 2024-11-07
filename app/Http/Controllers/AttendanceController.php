@@ -10,7 +10,7 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        $attendances = Attendance::latest()->paginate(10);
+        $attendances = Attendance::latest()->paginate(5);
         return view('attendances.index',compact('attendances'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
