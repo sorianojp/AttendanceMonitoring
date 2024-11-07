@@ -16,11 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index', 'users.students.index')">
-                        {{ __('Users') }}
-                    </x-nav-link>
-                </div>
+                @if (auth()->user() && auth()->user()->name === 'admin')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index', 'users.students.index')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    </div>
+                @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('attendances.index')" :active="request()->routeIs('attendances.index')">
                         {{ __('All Attendance Record') }}
@@ -89,11 +91,13 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index', 'users.students.index')">
-                {{ __('Users') }}
-            </x-responsive-nav-link>
-        </div>
+        @if (auth()->user() && auth()->user()->name === 'admin')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index', 'users.students.index')">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('attendances.index')" :active="request()->routeIs('attendances.index')">
                 {{ __('All Attendance Record') }}

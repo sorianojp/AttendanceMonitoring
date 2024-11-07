@@ -24,7 +24,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {!! $categories->links() !!}
+            {!! $attendances->links() !!}
         </div>
     </div>
 </x-app-layout>
