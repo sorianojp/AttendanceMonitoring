@@ -25,6 +25,10 @@ Route::get('/', function() {
     return view('rfid_scan', compact('attendances', 'today'));
 });
 
+Route::get('/privacy-policy', function() {
+    return view('privacy');
+});
+
 Route::resource('attendances', AttendanceController::class);
 
 
