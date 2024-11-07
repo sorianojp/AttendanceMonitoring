@@ -44,7 +44,10 @@
                             <tr class="bg-white border-b">
                                 <td class="px-6 py-4">{{ ++$i }}</td>
                                 <td class="px-6 py-4">{{ $user->name }}</td>
-                                <td class="px-6 py-4"><a href="{{ route('users.students.index', $user) }}">Students</a>
+                                <td class="px-6 py-4"><a href="{{ route('users.students.index', $user) }}">
+                                        <x-primary-button type="button">Students</x-primary-button>
+
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
