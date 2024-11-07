@@ -13,19 +13,20 @@
                     @csrf
                     <div>
                         <x-input-label for="lastname" :value="__('Last Name')" />
-                        <x-text-input type="text" name="lastname" />
+                        <x-text-input type="text" name="lastname" placeholder="Last Name" />
                     </div>
                     <div>
                         <x-input-label for="firstname" :value="__('First Name')" />
-                        <x-text-input type="text" name="firstname" />
+                        <x-text-input type="text" name="firstname" placeholder="First Name" />
                     </div>
                     <div>
                         <x-input-label for="middlename" :value="__('Middle Name')" />
-                        <x-text-input type="text" name="middlename" />
+                        <x-text-input type="text" name="middlename" placeholder="Middle Name" />
                     </div>
                     <div>
                         <x-input-label for="student_no" :value="__('RFID No')" />
-                        <x-text-input type="text" name="student_no" />
+                        <x-text-input type="text" name="student_no" placeholder="Scan RFID" />
+                        <x-input-label for="student_no" :value="__('Scan RFID to Save')" />
                     </div>
                     {{-- <div class="flex justify-end mt-2">
                         <x-primary-button type="submit">Save</x-primary-button>

@@ -11,19 +11,20 @@
                     @csrf
                     <div>
                         <x-input-label for="name" :value="__('Name')" />
-                        <x-text-input id="name" name="name" type="text" />
+                        <x-text-input id="name" name="name" type="text" placeholder="Full Name" />
                     </div>
                     <div>
                         <x-input-label for="email" :value="__('E-mail')" />
-                        <x-text-input id="email" name="email" type="email" />
+                        <x-text-input id="email" name="email" type="email" placeholder="E-Mail" />
                     </div>
                     <div>
                         <x-input-label for="password" :value="__('Password')" />
-                        <x-text-input id="password" name="password" type="password" />
+                        <x-text-input id="password" name="password" type="password" placeholder="Password" />
                     </div>
                     <div>
                         <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                        <x-text-input id="password_confirmation" name="password_confirmation" type="password" />
+                        <x-text-input id="password_confirmation" name="password_confirmation" type="password"
+                            placeholder="Confirm Password" />
                     </div>
                     <div class="flex justify-end mt-2">
                         <x-primary-button type="submit">Save</x-primary-button>
