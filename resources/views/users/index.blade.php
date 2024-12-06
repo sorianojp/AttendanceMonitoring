@@ -31,29 +31,53 @@
                     </div>
                 </form>
             </div>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-2/3">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">No</th>
-                            <th scope="col" class="px-6 py-3">Name</th>
-                            <th scope="col" class="px-6 py-3">Students</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4">{{ ++$i }}</td>
-                                <td class="px-6 py-4">{{ $user->name }}</td>
-                                <td class="px-6 py-4"><a href="{{ route('users.students.index', $user) }}">
-                                        <x-primary-button type="button">Students</x-primary-button>
-
-                                    </a>
-                                </td>
+            <div class="w-2/3">
+                <h1 class="mb-2">My Created Users</h1>
+                <div class="relative overflow-x-auto sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">No</th>
+                                <th scope="col" class="px-6 py-3">Name</th>
+                                <th scope="col" class="px-6 py-3">Students</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($myusers as $user)
+                                <tr class="bg-white border-b">
+                                    <td class="px-6 py-4">{{ ++$i }}</td>
+                                    <td class="px-6 py-4">{{ $user->name }}</td>
+                                    <td class="px-6 py-4"><a href="{{ route('users.students.index', $user) }}">
+                                            <x-primary-button type="button">Students</x-primary-button>
+
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <h1 class="my-2">All Created Users</h1>
+                <div class="relative overflow-x-auto sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">No</th>
+                                <th scope="col" class="px-6 py-3">Name</th>
+                                <th scope="col" class="px-6 py-3">Created By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr class="bg-white border-b">
+                                    <td class="px-6 py-4">{{ ++$i }}</td>
+                                    <td class="px-6 py-4">{{ $user->name }}</td>
+                                    <td class="px-6 py-4">{{ $user->creator->name ?? '' }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

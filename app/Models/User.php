@@ -15,6 +15,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'created_by'
     ];
 
     protected $hidden = [
@@ -33,5 +34,10 @@ class User extends Authenticatable
     public function students()
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

@@ -11,7 +11,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.index',compact('users'))
+        $myusers = User::where('created_by', auth()->id())->get();
+        return view('users.index',compact('users', 'myusers'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function store(Request $request)
@@ -27,6 +28,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'created_by' => auth()->id()
         ]);
 
         return redirect()->route('users.index')->with('success', 'User created successfully!');
